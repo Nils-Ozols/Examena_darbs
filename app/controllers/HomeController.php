@@ -15,9 +15,13 @@ class HomeController extends BaseController {
 	|
 	*/
 
-	public function showWelcome()
+	public function getIndex()
 	{
-		return View::make('hello');
+		if (Auth::user()->isAdmin())
+			$galleries = Gallery::all();
+		else
+			$galleries = Gallery::where('public','>',0)->get();
+		return View::make('galleries', array('galleries' => $galleries));
 	}
 
 }
