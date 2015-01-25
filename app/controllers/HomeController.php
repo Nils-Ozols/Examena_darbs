@@ -17,7 +17,7 @@ class HomeController extends BaseController {
 
 	public function getIndex()
 	{
-		if (Auth::user()->isAdmin())
+		if (Auth::check() and Auth::user()->isAdmin())
 			$galleries = Gallery::all();
 		else
 			$galleries = Gallery::where('public','>',0)->get();

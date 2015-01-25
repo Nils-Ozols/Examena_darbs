@@ -77,7 +77,7 @@ class UserController extends BaseController {
 			$user = User::find(Auth::id());
 		}
 		
-		if (Auth::id() != $user->id && !Auth::user()->isAdmin()) {
+		if (Auth::id() != $user->id && (Auth::check() and !Auth::user()->isAdmin())) {
 			$galleries = $user->galleries()->where('public', '>', 0)->get();
 		} else {
 			$galleries = $user->galleries()->get();

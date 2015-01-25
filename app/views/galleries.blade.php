@@ -11,7 +11,7 @@
 				        {{$gallery->description}}
 				        <p>
 				        	<a href="{{URL::to('gallery/view/'.$gallery->id)}}" class="btn btn-primary" role="button">View</a>
-				        	@if($gallery->user_id == Auth::id() || Auth::user()->isAdmin())
+				        	@if($gallery->user_id == Auth::id() || (Auth::check() and Auth::user()->isAdmin()))
 				        		<a href="{{URL::to('gallery/edit/'.$gallery->id)}}" class="btn btn-primary" role="button">Edit</a>
 				        	@endif
 				        </p>
